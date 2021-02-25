@@ -9,11 +9,35 @@ const SQRT_2PI = Math.sqrt(2 * Math.PI);
  */
 const kernels = {
     /**
-     * The gaussian kernel.
+     * Supported kernel functions.
      * @private
      */
     gaussian: function (u) {
         return Math.exp(-0.5 * u * u) / SQRT_2PI;
+    },
+    epanechnikov: function (u) {
+        if (Math.abs(u) > 1) {
+            return 0;
+        }
+        return (3 * (1 - u * u)) / 4;
+    },
+    cosine: function (u) {
+        if (Math.abs(u) > 1) {
+            return 0;
+        }
+        return (Math.PI / 4) * Math.cos((Math.PI * u) / 2);
+    },
+    triangular: function (u) {
+        if (Math.abs(u) > 1) {
+            return 0;
+        }
+        return 1 - Math.abs(u);
+    },
+    uniform: function (u) {
+        if (Math.abs(u) > 1) {
+            return 0;
+        }
+        return 1 / 2;
     }
 };
 
